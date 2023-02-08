@@ -28,8 +28,19 @@ class TracksViewController: UIViewController, UITableViewDataSource {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // TODO: Pt 1 - Pass the selected track to the detail view controller
+        // Get the cell that triggered the segue
+        if let cell = sender as? UITableViewCell,
+           // Get the index path of the cell from the table view
+           let indexPath = tableView.indexPath(for: cell),
+           // Get the detail view controller
+           let detailViewController = segue.destination as? DetailViewController {
 
+            // Use the index path to get the associated track
+            let track = tracks[indexPath.row]
 
+            // Set the track on the detail view controller
+            detailViewController.track = track
+        }
     }
 
     // TODO: Pt 1 - Add table view data source methods
@@ -50,5 +61,16 @@ class TracksViewController: UIViewController, UITableViewDataSource {
 
         // return the cell for display in the table view
         return cell
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Get the index path for the current selected table view row (if exists)
+        if let indexPath = tableView.indexPathForSelectedRow {
+
+            // Deselect the row at the corresponding index path
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 }
