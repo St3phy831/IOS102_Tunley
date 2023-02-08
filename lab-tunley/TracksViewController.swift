@@ -10,7 +10,7 @@ import UIKit
 class TracksViewController: UIViewController {
 
     // TODO: Pt 1 - Add a tracks property
-
+    var tracks: [Track] = []
 
     // TODO: Pt 1 - Add table view outlet
 
@@ -18,7 +18,8 @@ class TracksViewController: UIViewController {
         super.viewDidLoad()
 
         // TODO: Pt 1 - Set tracks property with mock tracks array
-
+        tracks = Track.mockTracks
+        print(tracks)
         
     }
 
